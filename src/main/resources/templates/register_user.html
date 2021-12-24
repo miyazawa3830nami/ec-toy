@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ラクラク屋さん-ユーザー登録-</title>
+
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body style="padding-bottom:5rem">
+
+	<!-- ナビゲーションtab -->
+	<span th:insert="top_page::navigation"></span>
+	<!-- ヘッダー -->
+	<span th:insert="top_page::header"></span>
+	
+	<form method="post" th:action="@{/insertUser}" th:object="${userForm}" enctype="multipart/form-data">
+		ユーザー登録
+		
+		<!-- 共通の項目 -->
+		<div>
+		<label th:errors="*{name}" style="color: red" for="inputError">エラーメッセージ</label>
+		<label for="inputName">名前：</label>
+		<input type="text" id="inputName" name="name" />
+		</div>
+		
+		<div>
+		<label th:errors="*{email}" style="color: red"  for="inputError">エラーメッセージ</label>
+		<label th:text="${emailRegistredError}" style="color: red" for="inputError">重複エラー</label>
+		<label for="inputEmail">メールアドレス：</label>
+		<input type="text" id="inputEmail" name="email" />
+		</div>
+		
+		<div>
+		<label th:errors="*{userId}" style="color: red"  for="inputError">エラーメッセージ</label>
+		<label th:text="${userIdRegistredError}" style="color: red" for="inputError">重複エラー</label>
+		<label for="inputUserId">ユーザーID：</label>
+		<input type="text" id="inputUserId" name="userId" />
+		</div>
+		
+		<div>
+		<label th:errors="*{password}" style="color: red" for="password">エラーメッセージ</label>
+		<label for="inputPassword">パスワード：</label>
+		<input type="password" id="inputPassword" name="password" />
+		</div>
+		
+		<div>
+		<label th:text="${passwordNotMatchError}" style="color: red" for="inputError">不一致エラー</label>
+		<label for="comPass">確認用パスワード：</label>
+		<input type="password" id="comPass" name="confirmPassword" />
+		</div>
+		
+		<div id="purpose">
+		利用区分：
+		<input type="radio" name="purpose" id="private" value="private">
+		<label for="private">個人利用</label>
+		<input type="radio" name="purpose" id="official" value="official">
+		<label for="official">企業利用</label>
+		</div>
+
+		<!-- 個人利用の場合 -->
+		<div id="privateForm">
+			<div>
+			<label for="zipcode">郵便番号：</label>
+			<input type="text" id="zipcode" name="zipcode" />
+			<input type="button" value="住所検索" id="get_address">
+			</div>
+
+			<div>
+			<label for="address">住所：</label>
+			<input type="text" id="address" name="address" />
+			</div>
+
+			<div>
+			<label th:text="${genderError}" style="color: red" for="inputError">未設定</label>
+			性別：
+			<input type="radio" name="gender" id="male" value="male">
+			<label for="male">男性</label>
+			<input type="radio" name="gender" id="female" value="female">
+			<label for="female">女性</label>
+			</div>
+
+			<div>
+			アイコン：
+			<input type="file" name="imagePath" accept=".jpg,.png,image/jpeg,image/png">
+			</div>
+		
+			<div>
+			<label th:text="${codeError}" style="color: red" for="inputError"></label>
+			<label for="code">紹介コードをお持ちの方
+			<input type="checkbox" id="code" name="code"></label>
+			<input type="text" id="usecode" name="usecode" />
+			</div>
+		</div>
+
+		<!-- 企業利用の場合 -->
+		<div id="officialForm">
+			<div>
+			<label th:text="${companyIdError}" style="color: red" for="inputError"></label>
+			企業ID：
+			<input type="text" id="companyId" name="companyId" />
+			</div>
+		</div>
+		
+		<button type="submit" id="submit">登録</button>
+		<button type="reset">クリア</button>
+		
+		<a th:href="@{/toLogin}">ログイン画面はこちら</a>
+	</form>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script th:src="@{/js/user.js}"></script>
+	<!-- お知らせカルーセル用追記 -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	
+</body>
+</html>
