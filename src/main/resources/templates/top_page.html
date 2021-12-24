@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ラクラク屋さん-トップページ-</title>
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- お知らせカルーセル用追記 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body style="padding-bottom:5rem">
+
+<!-- ヘッダー -->
+<div th:fragment="header" class="sticky-top">
+<div class="thumbnail">
+	<!-- ロゴ -->
+		<a th:href="@{/}">
+		<img src="./img/other/testlogo.png" class="logo">
+		</a>
+
+	<!-- お知らせ -->
+	 <div class="container">
+      <div class="carousel slide" id="sample" data-ride="carousel">
+       <!-- 下バー -->
+       <!-- 
+        <ol class="carousel-indicators">
+          <li data-target="#sample" data-slide-to="0" class="active"></li>
+          <li data-target="#sample" data-slide-to="1"></li>
+          <li data-target="#sample" data-slide-to="2"></li>
+        </ol>
+        -->
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="./img/other/nyuuka.jpg" class="d-block w-100" alt="新商品入荷しました"></div>
+          <div class="carousel-item"><img src="./img/other/oyako.jpg" class="d-block w-100" alt="親子で遊べるおもちゃ特集"></div>
+          <div class="carousel-item"><img src="./img/other/kyoiku.jpg" class="d-block w-100" alt="親子で遊べるおもちゃ特集"></div>
+        </div>
+        <a href="#sample" class="carousel-control-prev" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="sr-only">前の画像へ</span>
+        </a>
+        <a href="#sample" class="carousel-control-next" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="sr-only">次の画像へ</span>
+        </a>
+      </div>
+    </div>
+	<!-- 名前表示 -->
+	<div class="username">
+   	<span th:unless="${session.user == null}" th:text="${session.user.name}+さまログイン中">ユーザー名</span>
+	</div>
+</div>
+
+	<br>
+	<!-- 検索 -->
+	<div class="search">
+		<form method="post" th:action="@{/showList}">
+		<input type="text" id="searchName" name="searchName" />
+		<button type="submit">検索</button>
+		<button type="reset">クリア</button>
+		</form>
+	</div>
+	<hr>	
+</div>
+
+
+<!-- ナビゲーションtab -->
+<div th:fragment="navigation">
+<nav class="navbar fixed-bottom">
+	<ul class="nav nav-tabs">
+  	<li class="nav-item">
+   		<a class="nav-link" th:href="@{/}">ホーム</a>
+  	</li>
+	<li class="nav-item col-15">
+    	<a class="nav-link" th:href="@{/showList}">商品一覧</a>
+  	</li>
+  	<li class="nav-item col-15">
+    	<a class="nav-link" href="">出品</a>
+  	</li>
+  	<li class="nav-item col-15">
+    	<a th:if="${session.user == null}" th:href="@{/toLogin}" class="nav-link">ログイン</a>
+    	<a th:unless="${session.user == null}" th:href="@{/mypage}" class="nav-link">マイページ</a>
+  	</li>
+  	<li>
+		<a th:if="${session.user == null}" th:href="@{/toInsert}" class="nav-link">新規登録</a>
+  	</li>
+	</ul>
+</nav>
+</div>
+
+<!-- メニュー -->
+<a th:if="${session.user == null}" th:href="@{/toLogin}" class="navbar-link">
+<button>ログイン</button></a>
+<a th:unless="${session.user == null}" th:href="@{/logout}" class="navbar-link">
+<button>ログアウト</button></a>
+		<a th:if="${session.user == null}" th:href="@{/toInsert}" class="navbar-link">
+<button>ユーザー登録はこちら</button></a>
+<form>
+<button type="submit">商品の出品</button>
+</form>
+
+<!-- Twitter -->  
+<a class="twitter-timeline w-50" data-height="250" href="https://twitter.com/ectoy_test_umee?ref_src=twsrc%5Etfw">Tweets by ectoy_test_umee</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- お問い合わせ -->
+
+	<!-- お知らせカルーセル用追記 -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+</html>
