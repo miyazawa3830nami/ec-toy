@@ -1,0 +1,54 @@
+
+/** ÉçÉSÇ∆ÉJÉãÅ[ÉZÉãÇÃçÇÇ≥ÇÇªÇÎÇ¶ÇÈ */
+.thumbnail {
+   	display: flex;
+   	/**inline-block;*/
+    height: 150px;
+    margin-bottom: 30px;
+}
+
+.logo {
+	height: 150px;
+	margin-top: 15px;
+	margin-left: 30px;
+}
+.carousel {
+	width: 300px;
+	height: 150px;
+	margin-top: 15px;
+}
+.carousel-inner {
+	text-align: center;
+}
+.username {
+	color: #3399FF;
+	margin-top: 120px;
+	margin-right: 5px;
+}
+.search {
+	margin-left: 30px;
+}
+.carousel-control-next {
+  width: 5%;
+  background-color: #000;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+	filter: invert(100%);
+}
+
+.sticky-top {
+    background-color: #EEFFFF;
+}
+
+.navbar {
+    background-color: #EEFFFF;
+}
+
+.d-block {
+    border: 3px solid #3399FF;
+}
+.body {
+	background-image: url(./img/other/back.jpg);
+}
