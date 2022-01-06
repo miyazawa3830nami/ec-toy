@@ -1,14 +1,17 @@
 package com.example.controller;
 
-import java.sql.Date;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.domain.Item;
 import com.example.form.ItemForm;
@@ -81,18 +84,47 @@ public class ItemController {
 	}
 	
 	/**
+	 * 商品登録ページに遷移
+	 * @return
+	 */
+	@RequestMapping("/toInsertItem")
+	public String toInsertItem() {
+		return "item_insert";
+	}
+	
+	/**
 	 * 商品登録
 	 * @param itemform
 	 * @param result
 	 * @param model
 	 * @return
+	 */
 	@RequestMapping("/insertItem")
-	public String insertItem(@Validated ItemForm itemform,
+	public String insertItem(@Validated ItemForm itemForm,
 								BindingResult result,
 								Model model) {
 		if(result.hasErrors()) {
-			return "アイテム登録ページ";
+			return "item_insert";
 		}
+		
+		MultipartFile multiFile = itemForm.getImagePath();
+		String fileName = multiFile.getOriginalFilename();
+		
+		File filepath = new File("src/main/resources/static/img/item/"+fileName);
+		try {
+			byte[] bytes = multiFile.getBytes();
+			FileOutputStream stream = new FileOutputStream(filepath.toString());
+			stream.write(bytes);
+			stream.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		Item item = new Item();
+		BeanUtils.copyProperties(itemForm, item);
+		item.setPrice(itemForm.getPrice());
+		item.setImagePath(fileName);
+		itemService.insertItem(item);
+		return "redirect:/showList";
 	}
-	 */
 }

@@ -45,7 +45,10 @@
 	
 	<!-- メニュー -->
 	<ul>
-		<li>出品した商品</li>
+		<li><a th:href="@{/showUserItemList}">出品した商品</a></li>
+		<div th:each="item: ${itemList}">
+		<span th:text="{item.name}"></span>
+		</div>
 		<li>購入した商品</li>
 		<li></li>
 		<li>ログインボーナス取得</li>

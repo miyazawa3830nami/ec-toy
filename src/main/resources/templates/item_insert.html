@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>タイトル</title>
+	<link th:href="@{/css/header.css}" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ 	<!-- お知らせカルーセル用追記 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body style="padding-bottom:5rem">
+	<!-- ナビゲーションtab -->
+	<span th:insert="top_page::navigation"></span>
+	<!-- ヘッダー -->
+	<span th:insert="top_page::header"></span>
+	
+	<!-- 商品登録 -->
+	<form method="post" th:action="@{/insertItem}" th:object="${itemForm}" enctype="multipart/form-data">
+	
+	<div>
+	<!-- 
+	 <label th:errors="*{name}" style="color: red" for="inputError">エラーメッセージ</label>
+	 -->
+	<label for="inputName">商品名：</label>
+	<input type="text" id="inputName" name="name" />
+	</div>
+
+	<div>
+	<!-- 
+	<label th:errors="*{description}" style="color: red" for="inputError">エラーメッセージ</label>
+	 -->
+	<label for="inputDescription">商品説明：</label>
+	<textarea rows="3" cols="25" id="inputDescription" name="description">
+	</textarea>
+	</div>
+
+	<div>
+	<!-- 
+	<label th:errors="*{price}" style="color: red" for="inputError">エラーメッセージ</label>
+	 -->
+	<label for="inputPrice">価格：</label>
+	<input type="number" id="inputPrice" name="price" min="300" max="9999999"/>
+	</div>
+	
+	<div>
+	商品画像：
+	<input type="file" name="imagePath" accept=".jpg,.png,image/jpeg,image/png">
+	</div>
+	
+	<div>
+	商品分類：
+	<select name="category">
+		<option>----</option>
+		<option value="plush">ぬいぐるみ</option>
+		<option value="game">ゲーム</option>
+		<option value="plasticModel">プラモデル</option>
+		<option value="other">その他</option>
+	</select>
+	</div>
+	
+	<div>
+	<input type="hidden" name="userId" th:value="${session.user.id}">
+	</div>
+	
+	<!-- 企業利用のみ -->
+	<div>
+	<label for="inputStock">個数</label>
+	<input type="number" id="inputStock" name="stock" min="10" max="99999999"/>
+	</div>
+	
+	<div>
+	<input type="submit" value="出品" />
+	</div>
+	
+	</form>
+</body>
+</html>

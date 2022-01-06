@@ -166,4 +166,13 @@ public class UserController {
 	public String mypage() {
 		return "mypage";
 	}
+	
+	/**
+	 * ログインボーナス獲得
+	 * @return
+	@RequestMapping("/bonusPoint")
+	public String bonusPoint() {
+		
+	}
+	 */
 }

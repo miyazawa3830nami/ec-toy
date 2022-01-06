@@ -28,6 +28,8 @@ public class ItemRepository {
 		item.setPrice(rs.getInt("price"));
 		item.setImagePath(rs.getString("image_path"));
 		item.setCategory(rs.getString("category"));
+		item.setUserId(rs.getString("user_id"));
+		item.setStock(rs.getInt("stock"));
 		item.setDeleted(rs.getBoolean("deleted"));
 		item.setCreatedAt(rs.getTimestamp("created_at"));
 		item.setUpdatedAt(rs.getTimestamp("updated_at"));
@@ -108,8 +110,8 @@ public class ItemRepository {
 	 */
 	public void insertItem(Item item) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(item);
-		String insertItemSql = "INSERT INTO items (name, description, price, image_path, category, official) "
-				+ "VALUES (:name, :description, :price, :image_path, :category, :official);";
+		String insertItemSql = "INSERT INTO items (name, description, price, image_path, category, user_id) "
+				+ "VALUES (:name, :description, :price, :imagePath, :category, :userId);";
 		template.update(insertItemSql, param);
 	}
 	

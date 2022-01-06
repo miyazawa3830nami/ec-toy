@@ -93,4 +93,14 @@ public class UserService {
 			return "duplicateEmail";
 		}
 	}
+	
+	/**
+	 * ログインボーナス獲得
+	 * @param id
+	 * @param Point
+	 * @return
+	public User bonusPoint(Integer id, Integer Point) {
+		
+	}
+	 */
 }

@@ -1,5 +1,7 @@
 package com.example.form;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ItemForm {
 
 	//	商品名
@@ -9,7 +11,7 @@ public class ItemForm {
 	//	価格
 	private Integer price;
 	//	商品画像
-	private String imagePath;
+	private MultipartFile imagePath;
 	//	商品分類
 	private String category;
 	//	ユーザーID
@@ -39,10 +41,10 @@ public class ItemForm {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public String getImagePath() {
+	public MultipartFile getImagePath() {
 		return imagePath;
 	}
-	public void setImagePath(String imagePath) {
+	public void setImagePath(MultipartFile imagePath) {
 		this.imagePath = imagePath;
 	}
 	public String getCategory() {
